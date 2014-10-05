@@ -21,31 +21,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\QPU\AddressTranslation.cpp">
-      <Filter>Source Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\QPU\Processor.cpp">
-      <Filter>Source Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\QPU\QPU.cpp">
+    <ClInclude Include="include\AddressTranslation.h">
       <Filter>Header Files\Header Files</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="include\Architecture.h">
+      <Filter>Header Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\main.h">
+      <Filter>Header Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Processor.h">
+      <Filter>Header Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InterruptQueue.h">
+      <Filter>Header Files\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\QPU\AddressTranslation.h">
-      <Filter>Header Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\QPU\Architecture.h">
-      <Filter>Header Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\QPU\main.h">
-      <Filter>Header Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\QPU\Opcodes.h">
-      <Filter>Header Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\QPU\Processor.h">
-      <Filter>Header Files\Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="src\AddressTranslation.cpp">
+      <Filter>Source Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Processor.cpp">
+      <Filter>Source Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QPU.cpp">
+      <Filter>Source Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterruptQueue.cpp">
+      <Filter>Source Files\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

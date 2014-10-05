@@ -1,5 +1,7 @@
 #include "Architecture.h"
 
+#include "InterruptQueue.h"
+
 typedef unsigned int uint;
 
 #pragma once
@@ -71,7 +73,9 @@ public:
 
 	};
 
+	InterruptQueue intQueue;
 	Registers r;
+	reg sregs[0xff];
 	reg pc;
 	reg o;
 	bool broken = false;

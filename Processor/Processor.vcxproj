@@ -10,6 +10,19 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AddressTranslation.h" />
+    <ClInclude Include="include\Architecture.h" />
+    <ClInclude Include="include\InterruptQueue.h" />
+    <ClInclude Include="include\main.h" />
+    <ClInclude Include="include\Processor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="InterruptQueue.cpp" />
+    <ClCompile Include="src\AddressTranslation.cpp" />
+    <ClCompile Include="src\Processor.cpp" />
+    <ClCompile Include="src\QPU.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0FD77847-7CE1-44EF-8290-559B19712B1D}</ProjectGuid>
     <RootNamespace>Processor</RootNamespace>
@@ -44,6 +57,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include;$(SolutionDir)/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -63,18 +77,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\QPU\AddressTranslation.cpp" />
-    <ClCompile Include="..\QPU\Processor.cpp" />
-    <ClCompile Include="..\QPU\QPU.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\QPU\AddressTranslation.h" />
-    <ClInclude Include="..\QPU\Architecture.h" />
-    <ClInclude Include="..\QPU\main.h" />
-    <ClInclude Include="..\QPU\Opcodes.h" />
-    <ClInclude Include="..\QPU\Processor.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

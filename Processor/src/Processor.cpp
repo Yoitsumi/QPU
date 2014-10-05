@@ -16,6 +16,25 @@ Processor::~Processor() {
 }
 
 void Processor::step() {
+	if (intQueue.available()){
+		uint intCode = intQueue.pop();
+		sregs[SREG_ERPC] = pc;
+		sregs[SREG_IOCD] = intCode;
+		switch ((intCode&INTCODE_ORIGIN_MASK) >> INTCODE_ORIGIN_SHIFT){
+			case INTCODE_ORIGIN_HW:
+				pc = sregs[SREG_HWIV];
+				break;
+			case INTCODE_ORIGIN_DB:
+				pc = sregs[SREG_DBIV];
+				break;
+			case INTCODE_ORIGIN_EX:
+				pc = sregs[SREG_EXIV];
+				break;
+			case INTCODE_ORIGIN_SW:
+				pc = sregs[SREG_SWIV];
+				break;				
+		}
+	}
 	uint ir = mem.word[pc];
 	if(ir == 0xffffffff)
 		broken = true;
@@ -187,6 +206,13 @@ void Processor::rrStep(uint opcode, uint ir) {
 		case RR_JALR:
 			r[b] = pc;
 			pc = r[a];
+			break;
+		case RR_MFS:
+			r[a] = 0;
+			r[b] = sregs[aux];
+			break;
+		case RR_MTS:
+			sregs[aux] = r[b];
 			break;
 	}
 }

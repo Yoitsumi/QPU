@@ -4,6 +4,15 @@ namespace processor{
 	const uint OPCODE_MASK       = 0xf8000000;
 	const uint OPCODE_SHIFT      = 27;
 
+	/*
+	 * RRI8 format:
+	 * .       .       .       .        |
+	 * |op  |f  |d   |a   |b   |imm8    |  
+	 *  5b   4b  5b   5b   5b   B
+	 * op i OP_ARITH or OP_LOGIC
+	 * f specifies ALU function such as add, sub etc.
+	 * operation: $d = $a (f) ($b + simm8)
+	 */
 	const uint FUNCT_RRRI8_MASK  = 0x07800000;
 	const uint FUNCT_RRRI8_SHIFT = 23;
 	const uint DEST_RRRI8_MASK   = 0x007c0000;
@@ -14,7 +23,16 @@ namespace processor{
 	const uint B_RRRI8_SHIFT     = 8;
 	const uint IMM_RRRI8_MASK    = 0x000000ff;
 	const uint IMM_RRRI8_SHIFT   = 0;
-
+	
+	/*
+	 * MEM format:
+	 * .       .       .       .       |
+	 * |op  ||d   |a   |imm16          |
+	 *  5b  b 5b   5b   H
+	 * (second operand is called IPR)
+	 * loads or stores value from/to $d into memory address $a+simm16
+	 * (if IPR bit is set, pc of next instruction is added to address)
+	*/
 	const uint IPR_MEM_MASK      = 0x04000000;
 	const uint DEST_MEM_MASK     = 0x03e00000;
 	const uint DEST_MEM_SHIFT    = 21;
@@ -23,6 +41,13 @@ namespace processor{
 	const uint IMM_MEM_MASK      = 0x0000ffff;
 	const uint IMM_MEM_SHIFT     = 0;
 
+	/*
+	 * B format:
+	 * .       .       .       .       |
+	 * |op  |f  |a   |b   |imm13       |
+	 *  5b   4b  5b   5b   13b
+	 * operation: conditionally branches to pc + simm13
+	*/
 	const uint F_B_MASK          = 0x07800000;
 	const uint F_B_SHIFT         = 23;
 	const uint A_B_MASK          = 0x007c0000;
@@ -32,9 +57,22 @@ namespace processor{
 	const uint IMM_B_MASK        = 0x00001fff;
 	const uint IMM_B_SHIFT       = 0;
 
+	/*
+	 * J format:
+	 * .       .       .       .       |
+	 * |op  |addr                      |
+	 *  5b   27b
+	*/
 	const uint ADDR_J_MASK       = 0x07ffffff;
 	const uint ADDR_J_SHIFT      = 0;
 
+	/*
+	 * RR format:
+	 * |   .   ,   .   |   .   ,   .   |
+	 * |op  |f     |aux      |a   |b   |
+	 *  5b   7b     10b       5b   5b
+	 * operation: does some special stuff on registers a, b
+	*/
 	const uint FUNCT_RR_MASK     = 0x07f00000;
 	const uint FUNCT_RR_SHIFT    = 20;
 	const uint AUX_RR_MASK       = 0x000ffc00;
@@ -80,4 +118,25 @@ namespace processor{
 	const uint B_LE       = 0x3;
 
 	const uint RR_JALR    = 0x01;
+	/*
+	  Transfers data from register b into a special register specified in aux field
+	  If the special register is 64bit, higher bits are set to contents of $a
+	  otherwise $a should be set to $0 for compatibility with future versions
+	*/
+	const uint RR_MTS     = 0x70;
+	const uint RR_MFS     = 0x71;
+
+	const uint SREG_HWIV = 0x000; // HardWare Interrupt Vector 
+	const uint SREG_SWIV = 0x001; // SoftWare Interrupt Vector
+	const uint SREG_EXIV = 0x002; // EXception Interrupt Vector
+	const uint SREG_DBIV = 0x003; // DeBug Interrupt Vector
+	const uint SREG_ERPC = 0x004; // Exception Return PC
+	const uint SREG_IOCD = 0x005; // Interrupt Origin CoDe
+
+	const uint INTCODE_ORIGIN_MASK  = 0xc0000000;
+	const uint INTCODE_ORIGIN_SHIFT = 30;
+	const uint INTCODE_ORIGIN_HW = 0;
+	const uint INTCODE_ORIGIN_SW = 1;
+	const uint INTCODE_ORIGIN_EX = 2;
+	const uint INTCODE_ORIGIN_DB = 3;
 }
