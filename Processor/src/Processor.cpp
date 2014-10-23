@@ -8,7 +8,7 @@
 using namespace processor;
 using namespace std;
 
-Processor::Processor() : pc(0), mem(new char[1 << 20]) {
+Processor::Processor() : pc(0), mem(*this), ram(new char[1<<20]), rom(new char[1<<10]), dev(new char[1<<10]) {
 }
 
 
@@ -35,7 +35,7 @@ void Processor::step() {
 				break;				
 		}
 	}
-	uint ir = mem.word[pc];
+	uint ir = mem.word.exec(pc);
 	if(ir == 0xffffffff)
 		broken = true;
 	if(broken)
@@ -140,22 +140,22 @@ void Processor::memStep(uint opcode, uint ir) {
 	int addr = r[a] + imm + (pcr ? pc : 0);
 	switch(opcode) {
 		case OP_LB:
-			r[d] = mem.byte[addr];
+			r[d] = mem.byte.read(addr);
 			break;
 		case OP_LH:
-			r[d] = mem.half[addr];
+			r[d] = mem.half.read(addr);
 			break;
 		case OP_LW:
-			r[d] = mem.word[addr];
+			r[d] = mem.word.read(addr);
 			break;
 		case OP_SB:
-			mem.byte[addr] = r[d];
+			mem.byte.write(addr) = r[d];
 			break;
 		case OP_SH:
-			mem.half[addr] = r[d];
+			mem.half.write(addr) = r[d];
 			break;
 		case OP_SW:
-			mem.word[addr] = r[d];
+			mem.word.write(addr) = r[d];
 			break;
 	}
 }

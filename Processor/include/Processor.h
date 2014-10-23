@@ -1,8 +1,13 @@
 #include "Architecture.h"
 
+#include <memory>
+
 #include "InterruptQueue.h"
+#include "AddressTranslation.h"
 
 typedef unsigned int uint;
+
+using namespace std;
 
 #pragma once
 class Processor
@@ -34,35 +39,58 @@ public:
 
 	class Memory {
 		
-		char* ptr;
+		Processor& proc;
 
 	public:
-		Memory(char* p) : ptr(p), byte(p), half(p), word(p){}
-		Memory() : ptr(new char[1 << 20]), byte(ptr), half(ptr), word(ptr) {}
+		Memory(Processor& p) : proc(p), byte(proc), half(proc), word(proc) {}
 
 	private:
 		class ByteAcc {
-			const char* ptr;
+			Processor& proc;
 		public:
-			ByteAcc(char* p) : ptr(p) {}
-			inline char& operator[](int addr) {
-				return (char&) ptr[addr];
+			ByteAcc(Processor& p) : proc(p) {}
+
+			inline char read(int addr) {
+				return *((char*) memory::prepare(proc, memory::READ, addr));
+			}
+
+			inline char& write(int addr) {
+				return (char&) *((char*) memory::prepare(proc, memory::WRITE, addr));
+			}
+
+			inline char exec(int addr) {
+				return *((char*) memory::prepare(proc, memory::EXEC, addr));
 			}
 		};
 		class HalfAcc {
-			const char* ptr;
+			Processor& proc;
 		public:
-			HalfAcc(char* p) : ptr(p) {}
-			inline short& operator[](int addr) {
-				return (short&) (ptr[addr]);
+			HalfAcc(Processor& p) : proc(p) {}
+
+			inline short read(int addr) {
+				return *((short*) memory::prepare(proc, memory::READ, addr));
 			}
+			inline short& write(int addr) {
+				return (short&) *((short*) memory::prepare(proc, memory::WRITE, addr));
+			}
+			inline short exec(int addr) {
+				return *((short*) memory::prepare(proc, memory::EXEC, addr));
+			}
+
 		};
 		class WordAcc {
-			const char* ptr;
+			Processor& proc;
 		public:
-			WordAcc(char* p) : ptr(p) {}
-			inline int& operator[](int addr) {
-				return (int&) (ptr[addr]);
+			WordAcc(Processor& p) : proc(p) {}
+
+			inline int read(int addr) {
+				return *((int*) memory::prepare(proc, memory::READ, addr));
+			}
+			inline int& write(int addr) {
+				return (int&) *((int*) memory::prepare(proc, memory::WRITE, addr));
+			}
+			inline int exec(int addr) {
+				return *((int*) memory::prepare(proc, memory::EXEC, addr));
 			}
 		};
 
@@ -81,6 +109,10 @@ public:
 	bool broken = false;
 	
 	Memory mem;
+
+	unique_ptr<char> ram;
+	unique_ptr<char> rom;
+	unique_ptr<char> dev;
 
 	void step();
 

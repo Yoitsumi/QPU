@@ -21,34 +21,46 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\AddressTranslation.h">
-      <Filter>Header Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Architecture.h">
-      <Filter>Header Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\main.h">
-      <Filter>Header Files\Header Files</Filter>
+    <ClInclude Include="include\ConsoleDevice.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Processor.h">
-      <Filter>Header Files\Header Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Architecture.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InterruptQueue.h">
-      <Filter>Header Files\Header Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AddressTranslation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VGA.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AddressTranslation.cpp">
-      <Filter>Source Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Processor.cpp">
-      <Filter>Source Files\Source Files</Filter>
+    <ClCompile Include="src\ConsoleDevice.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\QPU.cpp">
-      <Filter>Source Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InterruptQueue.cpp">
-      <Filter>Source Files\Source Files</Filter>
+    <ClCompile Include="src\AddressTranslation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InterruptQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VGA.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -6,9 +6,11 @@
 #include <iostream>
 #include <fstream>
 #include <windows.h>
+#include <thread>
 
 #include "Processor.h"
 #include "Opcodes.h"
+#include "ConsoleDevice.h"
 
 using namespace processor;
 using namespace std;
@@ -39,14 +41,18 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	in.read(buffer, size);
 	in.close();
 	for(int i = 0; i < size; i++) {
-		proc.mem.byte[i] = buffer[i];
+		proc.ram.get()[i] = buffer[i];
 	}
 	delete buffer;
+
+	ConsoleDevice console(proc, 0, 4);
+	thread consthr(&ConsoleDevice::run, &console);
 	while(!proc.broken)
 		proc.step();
 	for(int i = 0; i < 32; i++) {
 		cout << "$" << i << ": " << proc.r[i] << endl;
 	}
+	consthr.join();
 	system("pause");
 }
 
