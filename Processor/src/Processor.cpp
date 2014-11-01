@@ -8,7 +8,7 @@
 using namespace processor;
 using namespace std;
 
-Processor::Processor() : pc(0), mem(*this), ram(new char[1<<20]), rom(new char[1<<10]), dev(new char[1<<10]) {
+Processor::Processor() : pc(0), mem(*this), ram(new char[1<<30]), rom(new char[1<<10]), dev(new char[1<<10]) {
 }
 
 
@@ -110,22 +110,22 @@ void Processor::aluStep(uint opcode, uint ir) {
 				r[d] = r[a] >> (r[b] + imm);
 				break;
 			case LOGIC_OR:
-				r[d] = r[a] | (r[b] + imm);
+				r[d] = r[a] | (r[b] + uimm);
 				break;
 			case LOGIC_AND:
-				r[d] = r[a] & (r[b] + imm);
+				r[d] = r[a] & (r[b] + uimm);
 				break;
 			case LOGIC_XOR:
-				r[d] = r[a] ^ (r[b] + imm);
+				r[d] = r[a] ^ (r[b] + uimm);
 				break;
 			case LOGIC_NOR:
-				r[d] = ~(r[a] | (r[b] + imm));
+				r[d] = ~(r[a] | (r[b] + uimm));
 				break;
 			case LOGIC_NAND:
-				r[d] = ~(r[a] & (r[b] + imm));
+				r[d] = ~(r[a] & (r[b] + uimm));
 				break;
 			case LOGIC_XNOR:
-				r[d] = ~(r[a] ^ (r[b] + imm));
+				r[d] = ~(r[a] ^ (r[b] + uimm));
 				break;
 		}
 	}

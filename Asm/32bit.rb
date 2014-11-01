@@ -393,12 +393,12 @@ def shra d, a, b, imm=0
   $pc += 4
   __flush
 end
-def or d, a, b, imm=0
+def bor d, a, b, imm=0
   $program << RRRI8.new($OP_LOGIC, $LOGIC_OR, d, a, b, imm)
   $pc += 4
   __flush
 end
-def and d, a, b, imm=0
+def band d, a, b, imm=0
   $program << RRRI8.new($OP_LOGIC, $LOGIC_AND, d, a, b, imm)
   $pc += 4
   __flush
@@ -424,7 +424,7 @@ def xnor d, a, b, imm=0
   __flush
 end
 
-def not d, a
+def bnot d, a
   nor d, a, $_0, 0 
 end
 

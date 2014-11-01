@@ -11,11 +11,12 @@
 #include "Processor.h"
 #include "Opcodes.h"
 #include "ConsoleDevice.h"
+#include "VGA.h"
 
 using namespace processor;
 using namespace std;
 
-int _tmain(int argc, _TCHAR* argv[]) {
+int wmain(int argc, _TCHAR* argv[]) {
 	Processor proc = Processor();
 	int pc = 0;
 	
@@ -45,14 +46,17 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	}
 	delete buffer;
 
-	ConsoleDevice console(proc, 0, 4);
-	thread consthr(&ConsoleDevice::run, &console);
+	//ConsoleDevice console(proc, 0, 4);
+	VGA vga(&proc);
+	//thread consthr(&ConsoleDevice::run, &console);
+	thread vgathr(&VGA::run, &vga);
 	while(!proc.broken)
 		proc.step();
 	for(int i = 0; i < 32; i++) {
 		cout << "$" << i << ": " << proc.r[i] << endl;
 	}
-	consthr.join();
+	//consthr.join();
 	system("pause");
+	return 0;
 }
 
