@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QPU", "QPU\QPU.vcxproj", "{4C9B88AD-F62B-4E92-840D-A0DF7F9A577C}"
 EndProject
@@ -12,20 +12,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		shared\Opcodes.h = shared\Opcodes.h
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CASM", "CASM\CASM.vcxproj", "{72E29C26-C2CA-4652-985D-BE5BED0F6272}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Casm - Debug|Win32 = Casm - Debug|Win32
+		Casm - Release|Win32 = Casm - Release|Win32
 		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C9B88AD-F62B-4E92-840D-A0DF7F9A577C}.Casm - Debug|Win32.ActiveCfg = Casm - Debug|Win32
+		{4C9B88AD-F62B-4E92-840D-A0DF7F9A577C}.Casm - Release|Win32.ActiveCfg = Casm - Release|Win32
 		{4C9B88AD-F62B-4E92-840D-A0DF7F9A577C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4C9B88AD-F62B-4E92-840D-A0DF7F9A577C}.Debug|Win32.Build.0 = Debug|Win32
 		{4C9B88AD-F62B-4E92-840D-A0DF7F9A577C}.Release|Win32.ActiveCfg = Release|Win32
 		{4C9B88AD-F62B-4E92-840D-A0DF7F9A577C}.Release|Win32.Build.0 = Release|Win32
+		{0FD77847-7CE1-44EF-8290-559B19712B1D}.Casm - Debug|Win32.ActiveCfg = Casm - Debug|Win32
+		{0FD77847-7CE1-44EF-8290-559B19712B1D}.Casm - Release|Win32.ActiveCfg = Casm - Release|Win32
 		{0FD77847-7CE1-44EF-8290-559B19712B1D}.Debug|Win32.ActiveCfg = Debug|Win32
 		{0FD77847-7CE1-44EF-8290-559B19712B1D}.Debug|Win32.Build.0 = Debug|Win32
 		{0FD77847-7CE1-44EF-8290-559B19712B1D}.Release|Win32.ActiveCfg = Release|Win32
 		{0FD77847-7CE1-44EF-8290-559B19712B1D}.Release|Win32.Build.0 = Release|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Casm - Debug|Win32.ActiveCfg = Casm - Debug|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Casm - Debug|Win32.Build.0 = Casm - Debug|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Casm - Release|Win32.ActiveCfg = Casm - Release|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Casm - Release|Win32.Build.0 = Casm - Release|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Casm - Release|Win32.Deploy.0 = Casm - Release|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Debug|Win32.ActiveCfg = Debug|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Debug|Win32.Build.0 = Debug|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Release|Win32.ActiveCfg = Release|Win32
+		{72E29C26-C2CA-4652-985D-BE5BED0F6272}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

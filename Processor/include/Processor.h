@@ -105,6 +105,7 @@ public:
 	Registers r;
 	reg sregs[0xff];
 	reg pc;
+	reg flags;
 	reg o;
 	bool broken = false;
 	
