@@ -4,7 +4,20 @@
 #include <memory>
 #include <string>
 
+#include "Token.h"
+
+#define stateDecl(i) RMStatus state##i(char, std::vector<std::shared_ptr<RegexpMachine >>&)
+#define stateDef(i) state##i(char c, std::vector<std::shared_ptr<RegexpMachine >>& branch)
+
 namespace casm {
+
+	bool isHexDigit(char);
+
+	bool isDigit(char);
+
+	bool isNameStart(char);
+
+	bool isNameConstituent(char);
 
 	/*codes for status of regexp state machines*/
 	enum RMStatus {
@@ -22,15 +35,19 @@ namespace casm {
 		unsigned int state;
 		std::vector<stateFunc> states;
 
-		RegexpMachine(std::vector<stateFunc>);
+		const TokenType tokenType;
+		const unsigned int priority;
+
+		RegexpMachine(std::vector<stateFunc>, TokenType, unsigned int priority);
 		RegexpMachine(const RegexpMachine&);
 
-		void copyFrom(RegexpMachine&);
+		//void copyFrom(RegexpMachine&);
 
 	public:
 		virtual ~RegexpMachine();
 
 		virtual RMStatus update(char c, std::vector<std::shared_ptr<RegexpMachine>>& branch);
+		Token createToken(std::string);
 
 	};
 
@@ -39,7 +56,8 @@ namespace casm {
 		const std::string keyword;
 
 	public:
-		KeywordRegexp(std::string);
+		KeywordRegexp(std::string, TokenType, unsigned int priority);
+		KeywordRegexp(const KeywordRegexp&);
 		virtual ~KeywordRegexp();
 		virtual RMStatus update(char c, std::vector<std::shared_ptr<RegexpMachine>>& branch);
 	};

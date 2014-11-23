@@ -2,28 +2,27 @@
 #include "RegexpMachine.h"
 
 namespace casm {
-
-	bool isHexDigit(char);
-
+	
 	/*-?[0-9]+*/
 	class DecimalNumberRegexp : public RegexpMachine {
 	public:
 		DecimalNumberRegexp();
+		DecimalNumberRegexp(const DecimalNumberRegexp&);
 		~DecimalNumberRegexp();
 
 	protected:
 		/* -?[0-9]+ 
 		   ^^
 		*/
-		RMStatus state0(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(0);
 		/* -?[0-9]+
 		     ^^^^^
 		*/
-		RMStatus state1(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(1);
 		/* -?[0-9]+
 				    ^
 		*/
-		RMStatus state2(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(2);
 	};
 
 	/*(0x[0-a-fA-F]+)|([0-9a-fA-F]+h)*/
@@ -38,37 +37,65 @@ namespace casm {
 		/* (0x[0-a-fA-F]+)|([0-9a-fA-F]+h)
 			^^             ^
 		*/
-		RMStatus state0(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(0);
 
 		/* (0x[0-a-fA-F]+)|([0-9a-fA-F]+h)
 		     ^
 		*/
-		RMStatus state1(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(1);
 
 		/* (0x[0-a-fA-F]+)|([0-9a-fA-F]+h)
 		      ^^^^^^^^^^
 		*/
-		RMStatus state2(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(2);
 
 		/* (0x[0-a-fA-F]+)|([0-9a-fA-F]+h)
 		                ^^
 		*/
-		RMStatus state3(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(3);
 
 		/* (0x[0-a-fA-F]+)|([0-9a-fA-F]+h)
 		                   ^^^^^^^^^^^^
 		*/
-		RMStatus state4(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(4);
 
 		/* (0x[0-a-fA-F]+)|([0-9a-fA-F]+h)
 		                               ^^
 		*/
-		RMStatus state5(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(5);
 
 		/* (0x[0-a-fA-F]+)|([0-9a-fA-F]+h)
 		                                 ^
 		*/
-		RMStatus state6(char, std::vector<std::shared_ptr<RegexpMachine>>&);
+		stateDecl(6);
+
+	};
+
+	/* 0b[01]+ */
+	class BinaryNumberRegexp : public RegexpMachine {
+
+	public:
+		BinaryNumberRegexp();
+		BinaryNumberRegexp(const BinaryNumberRegexp&);
+		virtual ~BinaryNumberRegexp();
+
+	protected:
+		/* 0b[01]+ 
+		   ^
+		*/
+		stateDecl(0);		
+		/* 0b[01]+
+		    ^
+		*/
+		stateDecl(1);
+		/* 0b[01]+
+		     ^^^^
+		*/
+		stateDecl(2);
+		/* 0b[01]+
+		         ^
+		*/
+		stateDecl(3);
 
 	};
 

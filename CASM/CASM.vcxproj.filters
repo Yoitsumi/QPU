@@ -21,6 +21,12 @@
     <ClInclude Include="include\NumberRegexp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RegisterRegexp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\RegexpMachine.cpp">
@@ -30,6 +36,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\NumberRegexp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Token.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RegisterRegexp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
