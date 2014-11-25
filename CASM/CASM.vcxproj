@@ -112,14 +112,18 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\NameRegexp.h" />
     <ClInclude Include="include\NumberRegexp.h" />
+    <ClInclude Include="include\ParsingBuffer.h" />
     <ClInclude Include="include\RegexpMachine.h" />
     <ClInclude Include="include\RegisterRegexp.h" />
     <ClInclude Include="include\Token.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\NameRegexp.cpp" />
     <ClCompile Include="src\NumberRegexp.cpp" />
+    <ClCompile Include="src\ParsingBuffer.cpp" />
     <ClCompile Include="src\RegexpMachine.cpp" />
     <ClCompile Include="src\RegisterRegexp.cpp" />
     <ClCompile Include="src\Token.cpp" />
