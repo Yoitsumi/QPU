@@ -3,22 +3,27 @@
 #include <memory>
 #include <string>
 
-using namespace std;
+#include "Array.h"
 
-class ParsingBuffer {
-	
-public:
-	ParsingBuffer();
-	~ParsingBuffer();
+namespace casm {
 
-	string getCurrentString();
-	void advance(int);
+	class ParsingBuffer {
 
-private:
-	const unique_ptr<char> data;
-	unsigned int length;
-	unsigned int mark;
-	unsigned int position;
+	public:
+		const Array<char> data;
 
-};
+		ParsingBuffer(unsigned length);
+		~ParsingBuffer();
 
+		std::string getCurrentString();
+		void advance(int);
+		bool eof();
+		char getChar();
+
+	private:
+		unsigned int mark;
+		unsigned int position;
+
+	};
+
+}

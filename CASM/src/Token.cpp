@@ -10,4 +10,18 @@ namespace casm {
 		}
 	}
 
+	bool Token::operator <(const Token& t) const {
+		return compareTo(t) < 0;
+	}
+	bool Token::operator >(const Token& t) const {
+		return compareTo(t) > 0;
+	}
+	bool Token::operator >=(const Token& t) const {
+		return compareTo(t) >= 0;
+	}
+	bool Token::operator <=(const Token& t) const {
+		return compareTo(t) <= 0;
+	}
+
+
 }
