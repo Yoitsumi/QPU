@@ -36,6 +36,15 @@
     <ClInclude Include="include\Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\WhiteSpaceRegexp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TokenList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParsingExceptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\RegexpMachine.cpp">
@@ -60,6 +69,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Array.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WhiteSpaceRegexp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TokenList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

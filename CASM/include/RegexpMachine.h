@@ -19,6 +19,8 @@ namespace casm {
 
 	bool isNameConstituent(char);
 
+	bool isWhiteSpace(char);
+
 	/*codes for status of regexp state machines*/
 	enum RMStatus {
 		/*matching - returned, when string may match until now*/
@@ -48,6 +50,10 @@ namespace casm {
 
 		virtual RMStatus update(char c, std::vector<std::shared_ptr<RegexpMachine>>& branch);
 		Token createToken(std::string);
+
+		virtual void reset() {
+			state = 0;
+		}
 
 	};
 

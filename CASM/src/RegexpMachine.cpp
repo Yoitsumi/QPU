@@ -25,6 +25,10 @@ namespace casm {
 			     c == '_' || c == '.';
 	}
 
+	bool isWhiteSpace(char c) {
+		return (c == ' ' || c == '\n' || c == '\t' || c == '\r' );
+	}
+
 	RegexpMachine::RegexpMachine(std::vector<stateFunc> sts, TokenType tt, unsigned int p) :
 		states(sts), state(0), tokenType(tt), priority(p) {
 	}
