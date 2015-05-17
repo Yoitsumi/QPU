@@ -123,5 +123,6 @@ private:
 	void bStep(uint opcode, uint ir);
 	void jStep(uint opcode, uint ir);
 	void rrStep(uint opcode, uint ir);
+	void rimmStep(uint opcode, uint ir);
 
 };

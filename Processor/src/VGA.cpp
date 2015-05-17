@@ -8,11 +8,15 @@ VGA::~VGA() {}
 
 void VGA::run() {
 	init();
-	while(true) {
+	while(running) {
 		SDL_PollEvent(NULL);
 		render();
 		SDL_Delay(1000/60);
 	}
+}
+
+void VGA::stop() {
+	running = false;
 }
 
 void VGA::render() {

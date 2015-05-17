@@ -93,10 +93,43 @@ int main() {
 	cin.ignore();
 }
 
-namespace casm{
+namespace casm {
+	
+	namespace ast {
+
+		struct registerOperand {
+		public:
+			unsigned int reg;
+		};
+
+		struct numberOperand {
+			int val;
+		};
+
+		struct operand {
+			enum { REGISTER, NUMBER } type;
+			union {
+				registerOperand reg;
+				numberOperand num;
+			} op;
+		};
+
+		struct instruction {
+		public:
+			string op;
+			vector<operand> operands;
+			unsigned int pc;
+		};
+	}
+
 	class Parse {
+
 	public:
 		TokenList tokens;
+		vector<ast::instruction> instructions;
+		map<string, ast::instruction*> labels;
+		vector<string> pendingLabels;
+
 
 		/* FILE := LINE+ END
 		*/
@@ -112,28 +145,32 @@ namespace casm{
 			}
 		}
 
-		/* LINE := MNEMONIC OPERAND ( COMA OPERAND)* NEWLINE
+		/* LINE := MNEMONIC [OPERAND ( COMA OPERAND)*] NEWLINE
 		/          NAME COLON
 		/          NEWLINE
 		*/
 		void line() {
 			Token& tok = tokens.lookahead(0);
 			switch(tok.type) {
-				case MNEMONIC:
-					tokens.next();
-					operand();
-					while(true) {
-						tok = tokens.next();
-						if(tok.type == COMA) {
-							operand();
-						} else if(tok.type == NEWLINE) {
-							return;
-						} else {
-							throw UnexpectedToken(tok.type);
+				case MNEMONIC: {
+					Token& mnem = tokens.next();
+					ast::instruction instr;
+					instr.op = mnem.image;
+					if(operand_lookahead()) {
+						ast::operand op = operand();
+						while(true) {
+							tok = tokens.next();
+							if(tok.type == COMA) {
+								operand();
+							} else if(tok.type == NEWLINE) {
+								return;
+							} else {
+								throw UnexpectedToken(tok.type);
+							}
 						}
 					}
 					break;
-
+				}
 				case NAME:
 					tokens.next();
 					tok = tokens.next();
@@ -157,17 +194,33 @@ namespace casm{
 		/             NAME
 		/             REGISTER
 		*/
-		void operand() {
+		ast::operand operand() {
 			Token& tok = tokens.next();
+			switch(tok.type) {
+				case DEC_NUMBER:
+					return ast::operand{ ast::operand::NUMBER, {} };
+				case HEX_NUMBER:
+				case BIN_NUMBER:
+				case NAME:
+				case REGISTER:
+
+					//return;
+				default:
+					throw UnexpectedToken(tok.type);
+			}
+		}
+
+		bool operand_lookahead() {
+			Token& tok = tokens.lookahead(0);
 			switch(tok.type) {
 				case DEC_NUMBER:
 				case HEX_NUMBER:
 				case BIN_NUMBER:
 				case NAME:
 				case REGISTER:
-					return;
+					return true;
 				default:
-					throw UnexpectedToken(tok.type);
+					return false;
 			}
 		}
 

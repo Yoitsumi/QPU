@@ -82,6 +82,20 @@ namespace processor{
 	const uint B_RR_MASK         = 0x0000001f;
 	const uint B_RR_SHIFT        = 0;
 
+	/*
+	 * RIMM format:
+	 * |   .   ,   .   |   .   ,   .   |
+	 * |op  |f    |d   |simm16         |
+	 *  5b   6b    5b   H
+	 * operation: does something on register and signed 16 bit immediate
+	 */
+	const uint FUNCT_RIMM_MASK  = 0x07e00000;
+	const uint FUNCT_RIMM_SHIFT = 21;
+	const uint D_RIMM_MASK      = 0x001f0000;
+	const uint D_RIMM_SHIFT     = 16;
+	const uint IMM_RIMM_MASK    = 0x0000ffff;
+	const uint IMM_RIMM_SHIFT   = 0;
+
 	const uint OP_ARITH = 0x00;
 	const uint OP_LOGIC = 0x01;
 	const uint OP_LB    = 0x02;
@@ -93,14 +107,17 @@ namespace processor{
 	const uint OP_B     = 0x0a;
 	const uint OP_J     = 0x0b;
 	const uint OP_JAL   = 0x0c;
+	const uint OP_RIMM  = 0x0d;
 	const uint OP_RR    = 0x1f;
 
 	const uint ARITH_ADD  = 0x0;
 	const uint ARITH_SUB  = 0x1;
 	const uint ARITH_MUL  = 0x2;
 	const uint ARITH_DIV  = 0x3;
+	const uint ARITH_MOD  = 0x5;
 	const uint ARITH_MULU = 0x6;
 	const uint ARITH_DIVU = 0x7;
+	const uint ARITH_MODU = 0x9;
 
 	const uint LOGIC_SHLL = 0x0;
 	const uint LOGIC_SHRL = 0x1;
@@ -125,6 +142,9 @@ namespace processor{
 	*/
 	const uint RR_MTS     = 0x70;
 	const uint RR_MFS     = 0x71;
+
+	const uint RIMM_LLH   = 0x10;
+	const uint RIMM_LUH   = 0x11;
 
 	const uint SREG_HWIV = 0x000; // HardWare Interrupt Vector 
 	const uint SREG_SWIV = 0x001; // SoftWare Interrupt Vector

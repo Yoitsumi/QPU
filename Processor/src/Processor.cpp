@@ -65,6 +65,9 @@ void Processor::step() {
 		case OP_RR:
 			rrStep(opcode, ir);
 			break;
+		case OP_RIMM:
+			rimmStep(opcode, ir);
+			break;
 	}
 }
 
@@ -84,19 +87,24 @@ void Processor::aluStep(uint opcode, uint ir) {
 				r[d] = r[a] - (r[b] + imm);
 				break;
 			case ARITH_MUL:{
-									long int res = ((long int) r[a]) * ((long int) (r[b] + imm)); //TODO higher bits of result into o register
-									cout << res << endl;
-									r[d] = res & 0xffffffff;
-									o = (res & 0xffffffff00000000) >> 32;
-									break;
+				long int res = ((long int) r[a]) * ((long int) (r[b] + imm)); //TODO higher bits of result into o register
+				//cout << res << endl;
+				r[d] = res & 0xffffffff;
+				o = (res & 0xffffffff00000000) >> 32;
+				break;
 			}
 			case ARITH_DIV:
 				r[d] = r[a] / (r[b] + imm);
 				o = r[a] % r[b];
 				break;
+			case ARITH_MOD:
+				r[d] = r[a] % (r[b] + imm);
+				break;
 			case ARITH_MULU:
 			case ARITH_DIVU:
 				break; //TODO unsigned arithmetic
+			case ARITH_MODU:
+				r[d] = (ureg) r[a] % ((ureg) r[b] + uimm);
 		}
 	} else {
 		switch(f) {
@@ -213,6 +221,24 @@ void Processor::rrStep(uint opcode, uint ir) {
 			break;
 		case RR_MTS:
 			sregs[aux] = r[b];
+			break;
+	}
+}
+
+void Processor::rimmStep(uint opcode, uint ir) {
+	int f = (ir & FUNCT_RIMM_MASK) >> FUNCT_RIMM_SHIFT;
+	int d = (ir & D_RIMM_MASK) >> D_RIMM_SHIFT;
+	short imm = (ir & IMM_RIMM_MASK) >> IMM_RIMM_SHIFT;
+	int uimm = (signed int) imm & 0xffff;
+	//cout << f << " " << d << " " << uimm << endl;
+	switch(f) {
+		case RIMM_LLH:
+			r[d] &= 0xffff0000;
+			r[d] |= uimm;
+			break;
+		case RIMM_LUH:
+			r[d] &= 0x0000ffff;
+			r[d] |= uimm << 16;
 			break;
 	}
 }

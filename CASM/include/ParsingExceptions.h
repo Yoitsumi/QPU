@@ -19,9 +19,9 @@ namespace casm {
 
 		virtual const char* what() const{
 			if(expected != NONE)
-				return ("Unexpected token encountered: " + TOKEN_TYPE_NAMES.at(encountered) + ", expected " + TOKEN_TYPE_NAMES.at(expected)).c_str;
+				return ("Unexpected token encountered: " + TOKEN_TYPE_NAMES.at(encountered) + ", expected " + TOKEN_TYPE_NAMES.at(expected)).c_str();
 			else 
-				return ("Unexpected token encountered: " + TOKEN_TYPE_NAMES.at(encountered)).c_str;
+				return ("Unexpected token encountered: " + TOKEN_TYPE_NAMES.at(encountered)).c_str();
 		}
 
 	};

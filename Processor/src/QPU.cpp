@@ -57,6 +57,9 @@ int wmain(int argc, _TCHAR* argv[]) {
 	}
 	//consthr.join();
 	system("pause");
+	vga.stop();
+	vgathr.join();
+
 	return 0;
 }
 

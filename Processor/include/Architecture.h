@@ -6,7 +6,7 @@
 
 
 #ifdef PROC_32BIT
-typedef int reg;
+typedef signed int reg;
 typedef unsigned int ureg;
 #elif defined PROC_64BIT
 typedef long int reg;
