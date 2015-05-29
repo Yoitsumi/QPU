@@ -140,8 +140,8 @@ namespace processor{
 	  If the special register is 64bit, higher bits are set to contents of $a
 	  otherwise $a should be set to $0 for compatibility with future versions
 	*/
-	const uint RR_MTS     = 0x70;
-	const uint RR_MFS     = 0x71;
+	const uint RR_MTS     = 0x30;
+	const uint RR_MFS     = 0x31;
 
 	const uint RIMM_LLH   = 0x10;
 	const uint RIMM_LUH   = 0x11;
